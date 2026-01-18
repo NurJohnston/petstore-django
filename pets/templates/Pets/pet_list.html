@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pets</title>
+</head>
+<body>
+    <h1>All Pets</h1>
+    <a href="{% url 'pet_create' %}">Add New Pet</a>
+
+    <ul>
+    {% for pet in pets %}
+    <li>
+        <strong>{{ pet.name }}</strong> — {{ pet.age }} years — {{ pet.colour }}
+        {% if pet.image %}
+            <br>
+            <img src="{{ pet.image.url }}" alt="{{ pet.name }}" width="100">
+        {% endif %}
+        <br>
+        <a href="{% url 'pet_edit' pet.id %}">Edit</a> |  <!-- Edit link -->
+        <a href="{% url 'pet_delete' pet.id %}">Delete</a> <!-- Delete link -->
+    </li>
+    {% empty %}
+    <li>No pets yet.</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
