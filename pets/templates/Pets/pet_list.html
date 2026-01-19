@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pets</title>
+</head>
+<body>
+    <h1>All Pets</h1>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'pet_create' %}">Add New Pet</a> |
+        <form style="display:inline;" method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'signup' %}">Sign Up</a>
+    {% endif %}
+
+    <ul>
+        {% for pet in pets %}
+        <li>
+            <strong>{{ pet.name }}</strong> — {{ pet.age }} years — {{ pet.colour }}
+            {% if pet.image %}
+                <br>
+                <img src="{{ pet.image.url }}" alt="{{ pet.name }}" width="100">
+            {% endif %}
+            <br>
+            {% if user.is_authenticated %}
+                <a href="{% url 'pet_edit' pet.id %}">Edit</a> |
+                <a href="{% url 'pet_delete' pet.id %}">Delete</a>
+            {% endif %}
+        </li>
+        {% empty %}
+        <li>No pets yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
