@@ -25,6 +25,8 @@ urlpatterns = [
     path('pets/', include('pets.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', pet_views.signup, name='signup'), 
+    path('api/', include('pets.api_urls')),
+
 ]
 
 if settings.DEBUG:

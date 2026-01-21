@@ -4,6 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .models import Pet
 from .forms import PetForm 
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from .serializers import PetSerializer
 
 def signup(request):
     if request.method == 'POST':
@@ -52,4 +55,16 @@ def pet_delete(request, pk):
         pet.delete()
         return redirect('pet_list')
     return render(request, 'pets/pet_confirm_delete.html', {'pet': pet})
+
+class PetListCreateAPI(generics.ListCreateAPIView):
+    queryset = Pet.objects.all()
+    serializer_class = PetSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class PetDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Pet.objects.all()
+    serializer_class = PetSerializer
+    permission_classes = [IsAuthenticated]
+
 
