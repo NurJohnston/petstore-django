@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pets',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/pets/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+    'rest_framework.permissions.IsAuthenticated',
+    ]
+
+
+}
