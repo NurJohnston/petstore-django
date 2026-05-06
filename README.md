@@ -4,8 +4,13 @@ integration piece, I built endpoints to handle GET, POST, PUT, PATCH, and DELETE
 them with Postman to make sure everything was hitting correctly.
 
 To run it:
+
 git clone https://github.com/NurJohnston/petstore-django.git
+
 cd petstore-django
+
 pip install -r requirements.txt
+
 python manage.py migrate
+
 python manage.py runserver
